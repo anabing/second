@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="div1">
+        <!-- 这是一个注释 -->
+        <p style="font-size:20px;">优雅的</p>
+        <div id="color">走在</div>
+        <h3>时间的</h3>
+        <a href="#">时间的前端</a>
+    </div>
+    <script>
+        function get_next(n){
+            var x=n.nextSibling;
+            //判断
+            while(x.nodeType!=1){
+                x=x.nextSibling;
+            }
+            return x;
+        }
+        var pp=get_next(div1.firstChild);
+        console.log(pp.nodeName);
+    </script>
+</body>
+</html>
