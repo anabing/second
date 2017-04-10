@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            width:200px;
+            height:200px;
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <p>这是一个p标签</p>
+    <input type="button" value="IE专用事件处理" id="btn"/>
+    <script>
+        //行内样式可以获取，可以设置
+        //外部样式  没办法通过p.style.xxx来获取 因为  p里面没有style这个属性
+        var myp=document.getElementsByTagName("p")[0];
+        // console.log(myp.style.width);  // 因为  p里面没有style这个属性
+        myp.style.color="red";
+        //  console.log(myp.style.color);
+
+        //下面是怎样获取外部样式
+        //只兼容IE浏览器：
+        //alert(myp.currentStyle.width);
+        //兼容其他的浏览器  如firefox  google:
+        //                   谁的属性，是否是伪类
+        // alert(getComputedStyle(myp,false).width);
+        //浏览器兼容，功能性检测：
+        function getStyle(obj,attr){
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+                //IE
+            }else{
+                //其他浏览器
+                return getComputedStyle(myp,false)[attr];
+            }
+        }
+        alert(getStyle(myp,"width"));
+
+        <!---->
+        var obtn=document.getElementById("btn");
+        //IE专用事件添加
+        //obtn.addEventListener("click",show);
+        //attachEvent事件不支持高版本的IE浏览器
+        obtn.attachEvent("onclick",show);
+        function show(){
+            alert("这是IE事件");
+        }
+        //删除事件 下面的也是不支持 detachEvent
+        //btn.detachEvent("onclick",show);
+    </script>
+</body>
+</html>
